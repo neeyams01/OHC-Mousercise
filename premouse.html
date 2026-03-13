@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>OHC Mousercise: Mouse Calibration</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="test-container">
+        <h1>Mouse Calibration</h1>
+        <p>Click your mouse buttons, the mouse on the screen represents your actual mouse.Click continue to proceed!!</p>
+
+        <div class="mouse-display">
+            <svg id="virtual-mouse" viewBox="0 0 100 160" width="180">
+                <path d="M10,60 Q10,10 50,10 Q90,10 90,60 L90,100 Q90,150 50,150 Q10,150 10,100 Z" fill="#e2e8f0" stroke="#475569" stroke-width="3"/>
+                <path id="left-btn" d="M10,60 Q10,10 50,10 L50,70 L10,70 Z" fill="white" stroke="#475569" stroke-width="2"/>
+                <path id="right-btn" d="M90,60 Q90,10 50,10 L50,70 L90,70 Z" fill="white" stroke="#475569" stroke-width="2"/>
+                <rect id="wheel" x="45" y="25" width="10" height="20" rx="5" fill="#475569" />
+            </svg>
+        </div>
+
+        <div id="status-text">Waiting for input...</div>
+        
+       <div class="navigation">
+            <a href="hover.html" class="nav-button">Continue to Exercise</a>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>OHC Mousercise: Drag Race</title>
+
+</head>
+<body>
+
+    <h3>6. Drag Race</h3>
+
+   <div class="exercise-grid">
+        
+        <div class="card">
+            <p>Drag the green button to drive your car across the finish line!</p>
+            
+            <div class="game-viewport">
+                <div id="road">
+                    <div class="car-npc" style="right: 1000px; top: 1px;">🏎️</div>
+                    <div class="car-npc" style="right: 2500px; top: 90px;">🚑</div>
+                    <div class="car-npc" style="right: 2800px; top: 30px;">🚔</div>
+                    <div class="car-npc" style="right: 1500px; top: 80px;">🏎️</div>
+                    <div class="finish-line"></div>
+                </div>
+                <div class="car">‍🚗</div>
+            </div>
+
+            <div class="track" id="track">
+                <div id="handle">GO</div>
+            </div>
+
+            <a href="rotate.html" class="nav-button">Continue</a>
+        </div>
+
+    </div>
+
+
+
+    <style>
+        body {
+            font-family: sans-serif;
+            background-color: #f0f4f8;
+            color: #333;
+            text-align: center;
+            padding: 40px;
+            margin: 0;
+        }
+
+        
+        .exercise-grid {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+            margin-top: 30px;
+        }
+        .card {
+            background: white;
+            border: 2px solid #ddd;
+            border-radius: 12px;
+            padding: 20px;   
+            width: 700px; /* Widened slightly to fit the game better */
+            margin: 20px 0;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .nav-button {
+            display: inline-block;
+            color: hsl(113, 76%, 47%);
+            font-weight: bold;
+            padding: 10px 20px;
+            text-decoration: none;
+            transition: all 0.2s ease-in-out;
+            border: 2px solid hsl(113, 76%, 47%);
+            border-radius: 8px;
+            margin-top: 20px;
+            background: white;
+        }
+
+        /* --- CAR EXERCISE ADJUSTMENTS --- */
+        .game-viewport {
+            position: relative;
+            width: 100%; /* Fill card width */
+            height: 300px; /* Fixed height for the card */
+            background: linear-gradient(#87ceeb, #b1e9ff);
+            overflow: hidden;
+            border-radius: 8px;
+            border: 2px solid #444;
+        }
+
+        #road {
+            position: absolute;
+            height: 150px; /* Smaller road for card view */
+            width: 3000px; 
+            background: #444;
+            border-top: 3px dashed white;
+            border-bottom: 3px dashed white;
+            top: 50%;
+            margin-top: -75px;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            will-change: transform;
+        }
+
+        .car {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            font-size: 40px; /* Smaller car */
+            transform: translate(-50%, -50%) scaleX(-1);
+            z-index: 10;
+            filter: hue-rotate(100deg) brightness(1.1) saturate(1.3);
+    
+        }
+
+        .car-npc {
+        position: absolute;
+        font-size: 50px;
+        /* Flip them to face right like the player car */
+        transform: scaleX(-1); 
+        pointer-events: none; /* Prevents them from interfering with dragging */
+}
+
+        .finish-line {
+            width: 60px;
+            height: 100%;
+            background: repeating-conic-gradient(#fff 0 25%, #000 0 50%) 0 0/10px 10px;
+        }
+
+        .track {
+            width: 90%;
+            height: 20px;
+            background: #111;
+            border-radius: 10px;
+            position: relative;
+            margin-top: 40px; /* Space for the handle */
+            margin-bottom: 20px;
+        }
+
+        #handle {
+            width: 40px;
+            height: 40px;
+            background: hsl(113, 76%, 43%);
+            border: 2px solid #fff;
+            border-radius: 50%;
+            position: absolute;
+            top: -12px;
+            left: 0;
+            cursor: grab;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 10px;
+            user-select: none;
+        }
+
+        #progress-text { font-size: 14px; font-weight: bold; margin-top: 15px; }
+    </style>
+
+
+    <script>
+        const handle = document.getElementById('handle');
+        const track = document.getElementById('track');
+        const road = document.getElementById('road');
+        const progressText = document.getElementById('progress-text');
+
+        let isDragging = false;
+
+        const moveRoad = (clientX) => {
+            const trackRect = track.getBoundingClientRect();
+            const maxX = trackRect.width - handle.offsetWidth;
+            
+            let x = clientX - trackRect.left - (handle.offsetWidth / 2);
+            if (x < 0) x = 0;
+            if (x > maxX) x = maxX;
+
+            handle.style.left = x + 'px';
+            const percent = x / maxX;
+
+            // Logic: Road starts at 0, ends with finish line at center of viewport
+            const roadWidth = road.offsetWidth;
+            const viewportCenter = trackRect.width / 2; // Relative center
+            
+            const totalTravel = roadWidth - viewportCenter;
+            const currentTranslate = -(percent * totalTravel);
+            
+            road.style.transform = `translateX(${currentTranslate}px)`;
+
+            const displayPercent = Math.floor(percent * 100);
+            if (displayPercent >= 99) {
+                progressText.innerText = "FINISH! 🏁";
+                progressText.style.color = "green";
+            } else {
+                progressText.innerText = `DISTANCE: ${displayPercent}%`;
+                progressText.style.color = "#333";
+            }
+        };
+
+        handle.addEventListener('mousedown', () => isDragging = true);
+        window.addEventListener('mouseup', () => isDragging = false);
+        window.addEventListener('mousemove', (e) => {
+            if (isDragging) moveRoad(e.clientX);
+        });
+
+        // Initialize road
+        window.onload = () => {
+            road.style.transform = `translateX(0px)`;
+        };
+    </script>
+</body>
+</html>

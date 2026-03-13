@@ -1,0 +1,315 @@
+body {
+    font-family: sans-serif;
+    background-color: #f0f4f8;
+    color: #333;
+    text-align: center;
+    padding: 40px;
+    margin: 0;
+}
+body.home-page {
+    
+    background-image: url('background.png');
+    background-size: cover;    
+  
+   background-position: center;  
+   
+    
+   
+    min-height: 100vh;          
+    margin: 0;       
+        
+}
+/* Navigation Buttons */
+.nav-button {
+    display: inline-block;
+    color: hsl(113, 76%, 47%);
+    font-family: sans-serif;
+    font-weight: bold;
+    padding: 15px 30px;
+    text-decoration: none;
+    transition: all 0.2s ease-in-out;
+    border: 2px solid hsl(113, 76%, 47%);
+    border-radius: 8px;
+    margin-top: 20px;
+    background: white;
+}
+
+.nav-button.disabled {
+    color: #999;
+    border-color: #ccc;
+    cursor: not-allowed;
+    pointer-events: none;
+    opacity: 0.5;
+}
+
+/* --- Layout Containers --- */
+.exercise-grid {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+    margin-top: 30px;
+}
+
+.card {
+    background: white;
+    border: 2px solid #ddd;
+    border-radius: 12px;
+    padding: 20px;   
+    width: 250px;
+    margin: 20px auto;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+.timer-active {
+    color: #e74c3c !important; /* Red while counting */
+    transform: scale(0.9);
+}
+
+.timer-off {
+    opacity: 0.9;
+}
+
+/*--- Hover Page */
+.hover-box {
+    background-color: hsl(113, 76%, 47%);
+    color: white;
+    height: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.3s;
+    border-radius: 8px;
+    cursor: default;
+    margin-top: 15px;
+}
+
+.hover-box.unlocked {
+    background-color: hsl(113, 76%, 47%);
+}
+
+#game-container {
+    position: relative; 
+    width: 80%;
+    height: 400px;
+    margin: 20px auto;
+    background: white;
+    border: 2px dashed #bbb;
+    border-radius: 15px;
+    overflow: hidden; 
+}
+
+#scatter-target {
+    position: absolute; 
+    background-color: hsl(113, 76%, 47%);
+    color: rgb(0, 0, 0);
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+}
+
+
+.drag-page {
+    position: relative;
+    height: 100vh;
+    overflow: hidden; 
+}
+
+#drop-zone {
+    width: 200px;
+    height: 200px;
+    border: 4px hsl(113, 76%, 47%);
+    background: hsl(113, 76%, 47%);
+    margin: 50px auto; 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 20px;
+    font-weight: bold;
+    color: #ffffff;
+    transition: background 0.3s;
+}
+
+#drop-zone.hover {
+    background: #e3f2fd;
+    border-color: hsl(113, 76%, 43%);
+}
+
+.custom-emoji {
+    height: 150px;       
+    width: auto;
+    pointer-events: none; 
+    user-select: none;   
+}
+
+.clutter-item {
+    cursor: grab;         
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;   
+}
+
+.clutter-item:active {
+    cursor: grabbing;     
+}
+
+
+#egg {
+    font-size: 80px;
+    cursor: pointer;
+    user-select: none;
+    margin: 20px;
+}
+
+
+.exercise-info h3 {
+    color: #333;
+    margin-bottom: 5px;
+}
+
+#game-box {
+    position: relative; 
+    width: 80%;
+    height: 450px;
+    margin: 20px auto;
+    background: #ffffff;
+    border: 3px dashed #cbd5e1;
+    border-radius: 12px;
+    overflow: hidden; /* Clips items so they stay in the box */
+    box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+}
+
+.item {
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    background-color: hsl(113, 76%, 43%);
+    border-radius: 50%;
+    cursor: crosshair;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 8px;
+    font-weight: bold;
+    transition: transform 0.2s, opacity 0.2s;
+}
+
+.item.pop {
+    transform: scale(1.5);
+    opacity: 0;
+}
+
+#continue-btn {
+    display: none; /* Hidden until 20 items collected */
+}
+
+/* pre check */
+
+.test-container {
+    text-align: center;
+    background: white;
+    padding: 40px;
+    border-radius: 20px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+}
+
+.mouse-display {
+    margin: 30px 0;
+}
+
+/* Animations for the SVG parts */
+#left-btn.active, #right-btn.active {
+    fill: hsl(113, 76%, 43%); /* Green highlight when clicked */
+    transition: fill 0.1s;
+}
+
+#wheel.active {
+    fill: #3b82f6;
+    transform: translateY(2px);
+}
+
+#status-text {
+    font-size: 30px;
+    font-weight: bold;
+    color: #64748b;
+    margin-bottom: 20px;
+    height: 24px;
+}
+
+/*practicals styling*/
+
+/* Container scales to fit the image */
+.exercise-container {
+    position: relative;
+    display: inline-block;
+    width: 1000px; /* Fixed width to match coordinates */
+    margin: 20px auto;
+    border: 2px solid #ccc;
+}
+
+.floating-instructions {
+    position: absolute;
+    /* This moves the text 280px to the left of the image */
+    right: -300px; 
+    top: 20px;
+    width: 250px;
+    text-align: left; /* Aligns text for better readability */
+    pointer-events: none; /* User can click "through" the text if needed */
+}
+
+.floating-instructions h3 {
+    margin-top: 0;
+    color: #333;
+    font-size: 1.2rem;
+    border-bottom: 2px solid hsl(113, 76%, 47%);
+    display: inline-block;
+}
+
+.floating-instructions ul {
+    list-style: none;
+    padding: 0;
+    line-height: 1.8;
+    font-weight: bold;
+    color: #555;
+}
+
+.bg-image {
+    display: block;
+    width: 100%;
+    height: auto;
+    /* This prevents the image from blocking clicks to the buttons */
+    pointer-events: none; 
+    user-select: none;
+}
+
+/* Base style for all hotspots */
+.hotspot {
+    position: absolute;
+    background: rgba(255, 255, 255, 0.3);
+    border: 2px solid #ffffff74;
+    cursor: pointer;
+    z-index: 10;
+}
+
+.floating-instructions .nav-button {
+    pointer-events: auto; 
+    display: inline-block;
+    position: relative;
+    z-index: 20; /* Ensures it sits above everything else */
+}
+
+
+
+/* EXACT COORDINATES (Based on 1000px width) */
+.email     { top: 197px; left: 632px; width: 155px; height: 35px; }
+.subscribe { top: 199px; left: 795px; width: 85px;  height: 35px; }
+.message   { top: 199px; left: 888px; width: 85px;  height: 35px; }
+.youtube   { top: 290px; left: 685px; width: 191px; height: 45px; }
+.search    { top: 110px; left: 500px; width: 470px; height: 45px; }

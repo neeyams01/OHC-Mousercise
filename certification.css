@@ -1,0 +1,55 @@
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+    background-color: #e9ecef; /* Subtle grey background */
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.cert-container {
+    text-align: center;
+    background: white;
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+    max-width: 600px; /* Limits how wide the "box" gets */
+    width: 90%;
+}
+
+.exercise-info h3 {
+    color: #2c3e50;
+    margin-bottom: 5px;
+}
+
+.cert-box {
+    margin: 25px 0;
+    border: 1px solid #ddd;
+    padding: 10px;
+    background: #fff;
+    /* Subtle inner shadow to make the image look set-in */
+    box-shadow: inset 0 0 5px rgba(0,0,0,0.05); 
+}
+
+#certificate-img {
+    display: block;
+    width: 100%;    /* Fills the cert-box */
+    height: auto;   /* Keeps proportions correct */
+}
+
+.download-btn {
+    display: inline-block;
+    padding: 15px 30px;
+    background-color: #28a745; /* "Success" Green */
+    color: white;
+    text-decoration: none;
+    border-radius: 8px;
+    font-weight: bold;
+    transition: transform 0.2s, background 0.2s;
+}
+
+.download-btn:hover {
+    background-color: #218838;
+    transform: translateY(-2px); /* Slight lift on hover */
+}
