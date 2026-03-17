@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>OHC Mousercise: Keyboard Practice</title>
+    <style>
+        /* --- INTEGRATED SITE CSS --- */
+        body {
+            font-family: sans-serif;
+            background-color: #f0f4f8;
+            color: #333;
+            text-align: center;
+            padding: 40px;
+            margin: 0;
+        }
+        .card {
+            background: white;
+            border: 2px solid #ddd;
+            border-radius: 12px;
+            padding: 25px;   
+            width: 600px; 
+            margin: 20px auto;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        /* --- CHALLENGE STYLES --- */
+        #target-container {
+            background: #f9f9f9;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            border: 2px dashed #ccc;
+        }
+
+        #target-key-display {
+            font-size: 4rem;
+            color: hsl(0, 0%, 0%);
+            font-weight: bold;
+            display: block;
+        }
+
+        .shift-badge {
+            display: inline-block;
+            padding: 5px 15px;
+            background: #eee;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: bold;
+            color: #999;
+            margin-top: 10px;
+            transition: all 0.3s;
+        }
+
+        .shift-badge.active {
+            background: #447cff;
+            color: white;
+            box-shadow: 0 0 10px rgba(255, 68, 68, 0.5);
+        }
+
+        .keyboard-grid {
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            gap: 5px;
+            background: #222;
+            padding: 15px;
+            border-radius: 8px;
+        }
+
+        .key {
+            background: #444;
+            color: white;
+            padding: 10px 0;
+            border-radius: 4px;
+            font-size: 12px;
+            transition: 0.1s;
+        }
+
+        .key.target-hint {
+            background: hsl(0, 0%, 0%);
+            color: #222;
+        }
+
+        .key.pressed {
+            background: hsl(0, 0%, 0%);
+            transform: scale(0.9);
+        }
+
+        .nav-button {
+         display: inline-block;
+        color: hsl(113, 76%, 47%);
+        font-family: sans-serif;
+        font-weight: bold;
+        padding: 15px 30px;
+        text-decoration: none;
+        transition: all 0.2s ease-in-out;
+        border: 2px solid hsl(113, 76%, 47%);
+        border-radius: 8px;
+        margin-top: 20px;
+        background: white;
+        }
+
+        /* Add this to your existing CSS */
+        .nav-button.disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+        background-color: #eee;
+        border-color: #ccc;
+        color: #999;
+        pointer-events: none; /* This prevents clicking */
+        }
+
+        .score-box { margin-top: 20px; font-weight: bold; }
+    </style>
+</head>
+<body>
+
+    <div class="card">
+        <h3>Keyboard Exercise</h3>
+        <p>For the last exercise press the keys the exercise requires you to! You might need to press "SHIFT" key for some. </p>
+
+        <div id="target-container">
+            <span id="target-key-display">?</span>
+            <div id="shift-indicator" class="shift-badge">SHIFT REQUIRED</div>
+        </div>
+
+        <div class="keyboard-grid" id="kb-grid">
+            </div>
+
+        <div class="score-box">Keys Mastered: <span id="score">0</span></div>
+    <a href="congrats.html" id="continue-btn" class="nav-button disabled">Continue</a>    </div>
+
+    <script>
+        // Array of objects defining character and if Shift is needed
+        const keyPool = [
+            {char: 'A', shift: true}, {char: 'B', shift: true}, {char: '!', shift: true},
+            {char: '@', shift: true}, {char: '#', shift: true}, {char: '$', shift: true},
+            {char: '%', shift: true}, {char: '^', shift: true}, {char: '&', shift: true},
+            {char: '*', shift: true}, {char: '(', shift: true}, {char: ')', shift: true},
+            {char: '?', shift: true}, {char: ':', shift: true}, {char: '"', shift: true},
+            {char: '1', shift: false}, {char: '2', shift: false}, {char: '3', shift: false},
+            {char: 'p', shift: false}, {char: 's', shift: false}, {char: 'm', shift: false},
+            {char: '[', shift: false}, {char: ']', shift: false}, {char: ';', shift: false},
+            {char: ',', shift: false}, {char: '.', shift: false}, {char: '/', shift: false}
+        ];
+
+        let currentTarget = {};
+        let score = 0;
+
+        const display = document.getElementById('target-key-display');
+        const shiftInd = document.getElementById('shift-indicator');
+        const scoreDisplay = document.getElementById('score');
+
+        function pickNextKey() {
+            currentTarget = keyPool[Math.floor(Math.random() * keyPool.length)];
+            display.innerText = currentTarget.char;
+            
+            if (currentTarget.shift) {
+                shiftInd.classList.add('active');
+                shiftInd.innerText = "SHIFT + KEY";
+            } else {
+                shiftInd.classList.remove('active');
+                shiftInd.innerText = "NO SHIFT";
+            }
+        }
+
+       const continueBtn = document.getElementById('continue-btn');
+const GOAL_SCORE = 20;
+
+window.addEventListener('keydown', (e) => {
+    // Check if the character matches
+    if (e.key === currentTarget.char) {
+        score++;
+        scoreDisplay.innerText = score;
+        display.style.color = "green";
+
+        // --- NEW LOGIC START ---
+        if (score >= GOAL_SCORE) {
+            continueBtn.classList.remove('disabled');
+            continueBtn.style.color = "white";
+            continueBtn.style.backgroundColor = "hsl(113, 76%, 47%)";
+            continueBtn.innerText = "Challenge Complete! Click to Continue";
+        }
+        // --- NEW LOGIC END ---
+        
+        setTimeout(() => {
+            display.style.color = "hsl(0, 0%, 0%)";
+            pickNextKey();
+        }, 150);
+    } else {
+        if (e.key !== 'Shift') {
+            display.style.color = "red";
+            setTimeout(() => display.style.color = "hsl(0, 0%, 0%)", 200);
+        }
+    }
+});
+
+        
+        // Fill background grid for decoration
+        const grid = document.getElementById('kb-grid');
+        const labels = "1234567890-=QWERTYUIOP[]ASDFGHJKL;'ZXCVBNM,./".split("");
+        labels.forEach(l => {
+            const d = document.createElement('div');
+            d.className = 'key';
+            d.innerText = l;
+            grid.appendChild(d);
+        });
+
+        pickNextKey();
+    </script>
+</body>
+</html>
