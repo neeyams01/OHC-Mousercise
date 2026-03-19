@@ -21,5 +21,42 @@
             </a>
         </div>
     </div>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+<script>
+    window.onload = () => {
+        // 1. Initial big celebratory burst
+        confetti({
+            particleCount: 100,
+            spread: 70,
+            origin: { y: 0.6 }
+        });
+
+        // 2. The "Shower" effect
+        const end = Date.now() + (5 * 1000); // 5 seconds duration
+
+        (function frame() {
+          // Launch 3 particles from a random X position at the top (y: -0.1)
+          confetti({
+            particleCount: 3,
+            angle: 270,        // Points the confetti downwards
+            spread: 360,       // Let them wiggle/spin
+            origin: { 
+                x: Math.random(), 
+                y: Math.random() - 0.2 // Start slightly above the screen
+            },
+            colors: ['#28a745', '#2c3e50', '#f1c40f', '#e74c3c', '#3498db'],
+            ticks: 300,        // How long the particle stays on screen
+            gravity: 0.8,      // How fast they fall
+            scalar: 0.9,       // Size of particles
+            drift: Math.random() - 0.5 // Random wind/drift left or right
+          });
+
+          if (Date.now() < end) {
+            requestAnimationFrame(frame);
+          }
+        }());
+    };
+</script>
 </body>
 </html>
