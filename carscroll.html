@@ -162,54 +162,66 @@
     </style>
 
 
-    <script>
-        const handle = document.getElementById('handle');
-        const track = document.getElementById('track');
-        const road = document.getElementById('road');
-        const progressText = document.getElementById('progress-text');
+   <script>
+    const handle = document.getElementById('handle');
+    const track = document.getElementById('track');
+    const road = document.getElementById('road');
+    const progressText = document.getElementById('progress-text');
 
-        let isDragging = false;
+    let isDragging = false;
+    let isFinished = false; // New flag to track completion
 
-        const moveRoad = (clientX) => {
-            const trackRect = track.getBoundingClientRect();
-            const maxX = trackRect.width - handle.offsetWidth;
+    const moveRoad = (clientX) => {
+        // If they already finished, don't let them move the handle back
+        if (isFinished) return;
+
+        const trackRect = track.getBoundingClientRect();
+        const maxX = trackRect.width - handle.offsetWidth;
+        
+        let x = clientX - trackRect.left - (handle.offsetWidth / 2);
+        if (x < 0) x = 0;
+        if (x > maxX) x = maxX;
+
+        handle.style.left = x + 'px';
+        const percent = x / maxX;
+
+        const roadWidth = road.offsetWidth;
+        const viewportCenter = trackRect.width / 2; 
+        
+        const totalTravel = roadWidth - viewportCenter;
+        const currentTranslate = -(percent * totalTravel);
+        
+        road.style.transform = `translateX(${currentTranslate}px)`;
+
+        const displayPercent = Math.floor(percent * 100);
+        
+        if (displayPercent >= 99) {
+            isFinished = true; // Set flag to true
+            isDragging = false; // Stop the dragging state
+            handle.style.cursor = "default"; // Change cursor to indicate it's stuck
+            handle.style.left = maxX + 'px'; // Snap perfectly to the end
             
-            let x = clientX - trackRect.left - (handle.offsetWidth / 2);
-            if (x < 0) x = 0;
-            if (x > maxX) x = maxX;
+            progressText.innerText = "FINISH! 🏁";
+            progressText.style.color = "green";
+        } else {
+            progressText.innerText = `DISTANCE: ${displayPercent}%`;
+            progressText.style.color = "#333";
+        }
+    };
 
-            handle.style.left = x + 'px';
-            const percent = x / maxX;
+    handle.addEventListener('mousedown', () => {
+        if (!isFinished) isDragging = true;
+    });
 
-            // Logic: Road starts at 0, ends with finish line at center of viewport
-            const roadWidth = road.offsetWidth;
-            const viewportCenter = trackRect.width / 2; // Relative center
-            
-            const totalTravel = roadWidth - viewportCenter;
-            const currentTranslate = -(percent * totalTravel);
-            
-            road.style.transform = `translateX(${currentTranslate}px)`;
+    window.addEventListener('mouseup', () => isDragging = false);
+    
+    window.addEventListener('mousemove', (e) => {
+        if (isDragging) moveRoad(e.clientX);
+    });
 
-            const displayPercent = Math.floor(percent * 100);
-            if (displayPercent >= 99) {
-                progressText.innerText = "FINISH! 🏁";
-                progressText.style.color = "green";
-            } else {
-                progressText.innerText = `DISTANCE: ${displayPercent}%`;
-                progressText.style.color = "#333";
-            }
-        };
-
-        handle.addEventListener('mousedown', () => isDragging = true);
-        window.addEventListener('mouseup', () => isDragging = false);
-        window.addEventListener('mousemove', (e) => {
-            if (isDragging) moveRoad(e.clientX);
-        });
-
-        // Initialize road
-        window.onload = () => {
-            road.style.transform = `translateX(0px)`;
-        };
-    </script>
+    window.onload = () => {
+        road.style.transform = `translateX(0px)`;
+    };
+</script>
 </body>
 </html>
