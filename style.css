@@ -19,7 +19,7 @@ body.home-page {
     margin: 0;       
         
 }
-/* Navigation Buttons */
+
 .nav-button {
     display: inline-block;
     color: #005C0D;
@@ -42,7 +42,6 @@ body.home-page {
     opacity: 0.5;
 }
 
-/* --- Layout Containers --- */
 .exercise-grid {
     display: flex;
     justify-content: center;
@@ -62,7 +61,7 @@ body.home-page {
 }
 
 .timer-active {
-    color: #e74c3c !important; /* Red while counting */
+    color: #e74c3c !important; 
     transform: scale(0.9);
 }
 
@@ -70,7 +69,6 @@ body.home-page {
     opacity: 0.9;
 }
 
-/*--- Hover Page */
 .hover-box {
     background-color: hsl(113, 76%, 47%);
     color: white;
@@ -181,7 +179,7 @@ body.home-page {
     background: #ffffff;
     border: 3px dashed #cbd5e1;
     border-radius: 12px;
-    overflow: hidden; /* Clips items so they stay in the box */
+    overflow: hidden; 
     box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
 }
 
@@ -207,10 +205,9 @@ body.home-page {
 }
 
 #continue-btn {
-    display: none; /* Hidden until 20 items collected */
+    display: none; 
 }
 
-/* pre check */
 
 .test-container {
     text-align: center;
@@ -224,9 +221,8 @@ body.home-page {
     margin: 30px 0;
 }
 
-/* Animations for the SVG parts */
 #left-btn.active, #right-btn.active {
-    fill: hsl(113, 76%, 43%); /* Green highlight when clicked */
+    fill: hsl(113, 76%, 43%); 
     transition: fill 0.1s;
 }
 
@@ -243,25 +239,21 @@ body.home-page {
     height: 24px;
 }
 
-/*practicals styling*/
-
-/* Container scales to fit the image */
 .exercise-container {
     position: relative;
     display: inline-block;
-    width: 1000px; /* Fixed width to match coordinates */
+    width: 1000px; 
     margin: 20px auto;
     border: 2px solid #ccc;
 }
 
 .floating-instructions {
     position: absolute;
-    /* This moves the text 280px to the left of the image */
     right: -300px; 
     top: 20px;
     width: 250px;
-    text-align: left; /* Aligns text for better readability */
-    pointer-events: none; /* User can click "through" the text if needed */
+    text-align: left; 
+    pointer-events: none; 
 }
 
 .floating-instructions h3 {
@@ -284,12 +276,10 @@ body.home-page {
     display: block;
     width: 100%;
     height: auto;
-    /* This prevents the image from blocking clicks to the buttons */
     pointer-events: none; 
     user-select: none;
 }
 
-/* Base style for all hotspots */
 .hotspot {
     position: absolute;
     background: rgba(255, 255, 255, 0.3);
@@ -302,12 +292,9 @@ body.home-page {
     pointer-events: auto; 
     display: inline-block;
     position: relative;
-    z-index: 20; /* Ensures it sits above everything else */
+    z-index: 20; 
 }
 
-
-
-/* EXACT COORDINATES (Based on 1000px width) */
 .email     { top: 197px; left: 632px; width: 155px; height: 35px; }
 .subscribe { top: 199px; left: 795px; width: 85px;  height: 35px; }
 .message   { top: 199px; left: 888px; width: 85px;  height: 35px; }
