@@ -122,7 +122,7 @@ document.querySelectorAll('.clutter-item').forEach(item => {
 });
 
 const dropZone = document.getElementById('drop-zone');
-const dragCounter = document.getElementById('items-left'); // Find the counter
+const dragCounter = document.getElementById('items-left'); 
 const dragContinueBtn = document.getElementById('drag-continue');
 
 if (dropZone) {
@@ -192,7 +192,7 @@ window.addEventListener('wheel', (event) => {
 function completeExercise() {
     countDisplay.innerText = "5";
     nextBtn.style.display = "inline-block";
-    document.getElementById('status-text').style.color = "#4CAF50"; // Turn green
+    document.getElementById('status-text').style.color = "#4CAF50"; 
 }
 
 
@@ -251,10 +251,9 @@ function completeExercise() {
                 clearInterval(moveInterval);
                 item.remove();
             }
-        }, 16); // 16ms is roughly 60 frames per second
+        }, 16); 
     }
 
-    // Spawn new items every 1.8 seconds
     setInterval(spawnItem, 2000);
 }
 
@@ -325,23 +324,18 @@ window.addEventListener('scroll', () => {
     const road = document.getElementById('road');
     const progressText = document.getElementById('progress');
 
-    // 1. Calculate how far the user has scrolled (0 to 1)
     const scrollTop = window.scrollY;
     const docHeight = document.documentElement.scrollHeight - window.innerHeight;
     const scrollPercent = scrollTop / docHeight;
 
-    // 2. Define the road movement
-    // The road starts at -3500px and ends at 0px
+   
     const startPos = -3500; 
     const endPos = 0;
     
-    // Calculate current position based on scroll
     const currentPos = startPos + (scrollPercent * Math.abs(startPos));
 
-    // 3. Apply the movement
     road.style.transform = `translateX(${currentPos}px)`;
 
-    // 4. Update UI
     const displayPercent = Math.floor(scrollPercent * 100);
     progressText.innerText = `Distance: ${displayPercent}%`;
 
