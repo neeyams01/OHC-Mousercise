@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <title>OHC Mousercise: Keyboard Practice</title>
     <style>
-        /* --- INTEGRATED SITE CSS --- */
         body {
             font-family: sans-serif;
             background-color: #f0f4f8;
@@ -23,7 +22,6 @@
             box-shadow: 0 4px 6px rgba(0,0,0,0.1);
         }
 
-        /* --- CHALLENGE STYLES --- */
         #target-container {
             background: #f9f9f9;
             padding: 20px;
@@ -99,14 +97,13 @@
         background: white;
         }
 
-        /* Add this to your existing CSS */
         .nav-button.disabled {
         opacity: 0.5;
         cursor: not-allowed;
         background-color: #eee;
         border-color: #ccc;
         color: #999;
-        pointer-events: none; /* This prevents clicking */
+        pointer-events: none; 
         }
 
         .score-box { margin-top: 20px; font-weight: bold; }
@@ -167,20 +164,17 @@
 const GOAL_SCORE = 20;
 
 window.addEventListener('keydown', (e) => {
-    // Check if the character matches
     if (e.key === currentTarget.char) {
         score++;
         scoreDisplay.innerText = score;
         display.style.color = "green";
 
-        // --- NEW LOGIC START ---
         if (score >= GOAL_SCORE) {
             continueBtn.classList.remove('disabled');
             continueBtn.style.color = "white";
             continueBtn.style.backgroundColor = "hsl(113, 76%, 47%)";
             continueBtn.innerText = "Challenge Complete! Click to Continue";
         }
-        // --- NEW LOGIC END ---
         
         setTimeout(() => {
             display.style.color = "hsl(0, 0%, 0%)";
@@ -194,8 +188,7 @@ window.addEventListener('keydown', (e) => {
     }
 });
 
-        
-        // Fill background grid for decoration
+      
         const grid = document.getElementById('kb-grid');
         const labels = "1234567890-=QWERTYUIOP[]ASDFGHJKL;'ZXCVBNM,./".split("");
         labels.forEach(l => {
