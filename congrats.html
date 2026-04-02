@@ -25,7 +25,6 @@
 
 <script>
     window.onload = () => {
-        // 1. Initial big celebratory burst
         confetti({
             particleCount: 100,
             spread: 70,
@@ -36,20 +35,19 @@
         const end = Date.now() + (5 * 1000); // 5 seconds duration
 
         (function frame() {
-          // Launch 3 particles from a random X position at the top (y: -0.1)
           confetti({
             particleCount: 3,
-            angle: 270,        // Points the confetti downwards
-            spread: 360,       // Let them wiggle/spin
+            angle: 270,        
+            spread: 360,    
             origin: { 
                 x: Math.random(), 
-                y: Math.random() - 0.2 // Start slightly above the screen
+                y: Math.random() - 0.2
             },
             colors: ['#28a745', '#2c3e50', '#f1c40f', '#e74c3c', '#3498db'],
-            ticks: 300,        // How long the particle stays on screen
-            gravity: 0.8,      // How fast they fall
+            ticks: 300,       
+            gravity: 0.8,     
             scalar: 0.9,       // Size of particles
-            drift: Math.random() - 0.5 // Random wind/drift left or right
+            drift: Math.random() - 0.5
           });
 
           if (Date.now() < end) {
