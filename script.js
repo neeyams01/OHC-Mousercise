@@ -235,7 +235,6 @@ function completeExercise() {
             }
         });
 
-        // Movement Logic using setInterval (Always Runs)
         let currentY = -itemSize;
         const moveInterval = setInterval(() => {
             if (item.classList.contains('pop')) {
@@ -268,7 +267,6 @@ const precisionContinueBtn = document.getElementById('continue-btn');
 let leftClicked = false;
 let rightClicked = false;
 
-// Disable the default right-click menu for this page
 window.addEventListener('contextmenu', (e) => e.preventDefault());
 
 window.addEventListener('mousedown', (e) => {
