@@ -59,7 +59,7 @@
             border: 2px solid #ddd;
             border-radius: 12px;
             padding: 20px;   
-            width: 700px; /* Widened slightly to fit the game better */
+            width: 700px; 
             margin: 20px 0;
             box-shadow: 0 4px 6px rgba(0,0,0,0.1);
             display: flex;
@@ -79,11 +79,11 @@
             background: white;
         }
 
-        /* --- CAR EXERCISE ADJUSTMENTS --- */
+        /* CAR EXERCISE ADJUSTMENTS */
         .game-viewport {
             position: relative;
-            width: 100%; /* Fill card width */
-            height: 300px; /* Fixed height for the card */
+            width: 100%;
+            height: 300px;
             background: linear-gradient(#87ceeb, #b1e9ff);
             overflow: hidden;
             border-radius: 8px;
@@ -92,7 +92,7 @@
 
         #road {
             position: absolute;
-            height: 150px; /* Smaller road for card view */
+            height: 150px;
             width: 3000px; 
             background: #444;
             border-top: 3px dashed white;
@@ -109,7 +109,7 @@
             position: absolute;
             left: 50%;
             top: 50%;
-            font-size: 40px; /* Smaller car */
+            font-size: 40px; 
             transform: translate(-50%, -50%) scaleX(-1);
             z-index: 10;
             filter: hue-rotate(100deg) brightness(1.1) saturate(1.3);
@@ -119,9 +119,8 @@
         .car-npc {
         position: absolute;
         font-size: 50px;
-        /* Flip them to face right like the player car */
         transform: scaleX(-1); 
-        pointer-events: none; /* Prevents them from interfering with dragging */
+        pointer-events: none; 
 }
 
         .finish-line {
@@ -136,7 +135,7 @@
             background: #111;
             border-radius: 10px;
             position: relative;
-            margin-top: 40px; /* Space for the handle */
+            margin-top: 40px; 
             margin-bottom: 20px;
         }
 
@@ -169,10 +168,9 @@
     const progressText = document.getElementById('progress-text');
 
     let isDragging = false;
-    let isFinished = false; // New flag to track completion
+    let isFinished = false; 
 
     const moveRoad = (clientX) => {
-        // If they already finished, don't let them move the handle back
         if (isFinished) return;
 
         const trackRect = track.getBoundingClientRect();
@@ -196,10 +194,10 @@
         const displayPercent = Math.floor(percent * 100);
         
         if (displayPercent >= 99) {
-            isFinished = true; // Set flag to true
-            isDragging = false; // Stop the dragging state
-            handle.style.cursor = "default"; // Change cursor to indicate it's stuck
-            handle.style.left = maxX + 'px'; // Snap perfectly to the end
+            isFinished = true; 
+            isDragging = false; 
+            handle.style.cursor = "default"; 
+            handle.style.left = maxX + 'px'; 
             
             progressText.innerText = "FINISH! 🏁";
             progressText.style.color = "green";
