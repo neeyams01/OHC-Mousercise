@@ -6,7 +6,7 @@ body {
     margin: 0;
     background-color: #e9ecef;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    overflow: hidden; 
+    overflow-y:auto ; 
 
 }
 
