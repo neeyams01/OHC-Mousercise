@@ -114,8 +114,8 @@ body.home-page {
 
 .drag-page {
     position: relative;
-    height: 100vh;
-    overflow: hidden; 
+    height: 100vh; 
+ 
 }
 
 #drop-zone {
