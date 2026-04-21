@@ -245,6 +245,7 @@ body.home-page {
     width: 1000px; 
     margin: 20px auto;
     border: 2px solid #ccc;
+    padding-bottom: 50px;
 }
 
 .floating-instructions {
